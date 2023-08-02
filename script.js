@@ -329,7 +329,7 @@ window.addEventListener('load', function () {
                 this.frameX++;
                 this.timer = 0;
             } else {
-                this.timer+=deltaTime;
+                this.timer += deltaTime;
             }
             if (this.frameX > this.maxFrame) this.markedForDeletion = true;
         }
@@ -449,7 +449,7 @@ window.addEventListener('load', function () {
                         this.particles.push(new Particle(this, enemy.x, enemy.y, enemy.width * 0.5, enemy.height * 0.5));
                     }
                     if (enemy.type === 'lucky') this.player.enterPowerUp();
-                    else if(!this.gameOver) this.score--;
+                    else if (!this.gameOver) this.score--;
                 }
                 this.player.projectiles.forEach(projectile => {
                     if (this.checkCollision(projectile, enemy)) {
