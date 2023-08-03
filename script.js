@@ -5,6 +5,9 @@ window.addEventListener('load', function () {
     canvas.width = 1000;
     canvas.height = 500;
 
+
+
+    //InputHandler - It handles all the key inputs to control the game characters 
     class InputHandler {
         constructor(game) {
             this.game = game;
@@ -27,6 +30,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //Projectile class handles the projectiles fired by the seahorse
     class Projectile {
         constructor(game, x, y) {
             this.game = game;
@@ -47,6 +53,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //Particles and the gears which dropoff when enemies are killed
     class Particle {
         constructor(game, x, y) {
             this.game = game;
@@ -87,6 +96,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //Main player class
     class Player {
         constructor(game) {
             this.game = game;
@@ -110,7 +122,6 @@ window.addEventListener('load', function () {
             else if (this.game.keys.includes('ArrowDown')) this.speedY = this.maxSpeed;
             else this.speedY = 0;
             this.y += this.speedY;
-
             //Vertical boundaries
             if (this.y > this.game.height - this.height * 0.5) this.y = this.game.height - this.height * 0.5;
             else if (this.y < -this.height * 0.5) this.y = -this.height * 0.5;
@@ -119,14 +130,12 @@ window.addEventListener('load', function () {
                 projectile.update();
             });
             this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion);
-
             //sprite animation
             if (this.frameX < this.maxFrame) {
                 this.frameX++;
             } else {
                 this.frameX = 0;
             }
-
             //Power up
             if (this.powerUp) {
                 if (this.powerUpTimer > this.powerUpLimit) {
@@ -167,6 +176,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //Enemy class handles different enemy types that appear in the game
     class Enemy {
         constructor(game) {
             this.game = game;
@@ -263,7 +275,6 @@ window.addEventListener('load', function () {
             this.speedX = Math.random() * -4.2 - 0.5;
         }
     }
-
     class Layer {
         constructor(game, image, speedModifier) {
             this.game = game;
@@ -284,6 +295,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //Background class handles the background of the game and its animation
     class Background {
         constructor(game) {
             this.game = game;
@@ -306,6 +320,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //Explosion class handles the explosion animation after an enemy is killed
     class Explosion {
         constructor(game, x, y) {
             this.game = game;
@@ -337,14 +354,12 @@ window.addEventListener('load', function () {
             context.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         }
     }
-
     class SmokeExplosion extends Explosion {
         constructor(game, x, y) {
             super(game, x, y)
             this.image = document.getElementById('smokeExplosion');
         }
     }
-
     class FireExplosion extends Explosion {
         constructor(game, x, y) {
             super(game, x, y)
@@ -352,6 +367,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //UI class handles the game ui of score and winning and losing messages
     class UI {
         constructor(game) {
             this.game = game;
@@ -398,6 +416,9 @@ window.addEventListener('load', function () {
         }
     }
 
+
+
+    //Main game class
     class Game {
         constructor(width, height) {
             this.width = width;
@@ -520,6 +541,7 @@ window.addEventListener('load', function () {
 
     const game = new Game(canvas.width, canvas.height);
     let lastTime = 0;
+    
     //Animation loop
     function animate(timeStamp) {
         const deltaTime = timeStamp - lastTime;
